@@ -8,6 +8,5 @@ Tab complete the `-CertFriendlyName` parameter to list all code signing certific
 
 ```powershell
 Import-Module Invoke-BinarySignature.psm1
-Get-TimeStampServer
 New-BinarySignature -CertFriendlyName "PSCodeSigningTest" -BinPath "C:\Temp\Test-Signed.ps1"
 ```
