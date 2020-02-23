@@ -2,7 +2,7 @@ Function Get-TimeStampServer {
 [CmdletBinding()]
 Param(
 	[Parameter(HelpMessage="List of known good timestamp servers")]
-	$TimeStampServers = @("http://ca.signfiles.com/tsa/get.aspx","http://timestamp.globalsign.com/scripts/timstamp.dll")
+	$TimeStampServers = @("http://timestamp.globalsign.com/scripts/timstamp.dll","http://ca.signfiles.com/tsa/get.aspx")
 )
 	$TimeStampHostnames = $TimeStampServers -Replace("^http:\/\/","") -Replace ("\/.*","") #Isolate hostnames for Test-NetConnection
 	$Count = ($TimeStampHostnames.Count - 1)
@@ -10,7 +10,7 @@ Param(
 		Try {
 			If ([bool](Test-NetConnection $TimeStampHostnames[$i] -Port 80 | Select-Object -ExpandProperty TcpTestSucceeded)) {
 				Write-Verbose "$($TimeStampHostnames[$i]) selected"
-				$TimeStampServer = $TimeStampServers[$i]
+				$script:TimeStampServer = $TimeStampServers[$i]
 				Break #Once we find a valid server, stop looking.
 			}
 		}
@@ -46,6 +46,12 @@ Param(
 		$CertFriendlyName = $PSBoundParameters.CodeSigningCertName
 	}
 	Process {
+		Try {
+			Get-TimeStampServer
+		}
+		Catch {
+			Write-Error "TimeStampServer could not be reached"
+		}
 		Write-Verbose $CertFriendlyName
 		$CodeSigningCert = Get-ChildItem Cert:\CurrentUser\My | Where-Object FriendlyName -like $CertFriendlyName
 		Set-AuthenticodeSignature -Certificate $CodeSigningCert -TimestampServer $TimeStampServer -HashAlgorithm SHA256 -FilePath $BinPath
