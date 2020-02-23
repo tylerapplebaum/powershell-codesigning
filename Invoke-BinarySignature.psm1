@@ -2,7 +2,7 @@ Function Get-TimeStampServer {
 [CmdletBinding()]
 Param(
 	[Parameter(HelpMessage="List of known good timestamp servers")]
-	$TimeStampServers = @("http://timestamp.globalsign.com/scripts/timstamp.dll","http://ca.signfiles.com/tsa/get.aspx")
+	$TimeStampServers = @("http://timestamp.globalsign.com/scripts/timstamp.dll","http://timestamp.comodoca.com/rfc3161")
 )
 	$TimeStampHostnames = $TimeStampServers -Replace("^http:\/\/","") -Replace ("\/.*","") #Isolate hostnames for Test-NetConnection
 	$Count = ($TimeStampHostnames.Count - 1)
