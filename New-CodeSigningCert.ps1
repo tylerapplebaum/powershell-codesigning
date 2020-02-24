@@ -1,3 +1,13 @@
+<#
+.SYNOPSIS
+    Creates a new self-signed code signing certificate
+.DESCRIPTION
+    Creates a new self-signed code signing certificate, exports the certificate as a PFX, and imports it into the root trust store.
+.NOTES
+    Author  :   Tyler Applebaum
+    Created :   Feb 2020
+#>
+
 #Requires -RunAsAdministrator
 
 Function script:New-CodeSigningCert {
