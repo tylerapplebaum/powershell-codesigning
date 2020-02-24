@@ -22,6 +22,12 @@ Param(
 	[int]$CertValidYears
 )
 
+$MajorVersion = [System.Environment]::OSVersion.Version | Select-Object -ExpandProperty Major)
+If ($MajorVersion -lt 10) {
+	Write-Error "Windows 10 / Server 2016 or better is required to use the New-SelfSignedCertificate cmdlet"
+	Break
+}
+
 $SubjectFull = "CN=$Subject,E=$EMail"
 $SecurePassword = ConvertTo-SecureString -String $PFXPassword -AsPlainText -Force
 
