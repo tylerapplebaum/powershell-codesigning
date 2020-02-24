@@ -16,14 +16,13 @@ Param(
 	[string]$PFXPassword,
 	
 	[Parameter(HelpMessage="Certificate export path")]
-	$CertFilePath,
+	$CertFilePath = $([Environment]::GetFolderPath("Desktop")),
 	
 	[Parameter(HelpMessage="Certificate validity in years")]
-	[int]$CertValidYears,
-	
-	[Parameter(HelpMessage="Certificate e-mail address")]
-	$SubjectFull = "CN=$Subject,E=$EMail"
+	[int]$CertValidYears
 )
+
+$SubjectFull = "CN=$Subject,E=$EMail"
 $SecurePassword = ConvertTo-SecureString -String $PFXPassword -AsPlainText -Force
 
 #Generate certificate
@@ -35,6 +34,3 @@ Export-PfxCertificate -Cert $CodeSigningCert -FilePath $CertFilePath\$FriendlyNa
 #Install cert in root store so it is trusted - Requires RunAsAdministrator in script usage
 Import-PfxCertificate -FilePath $CertFilePath\$FriendlyName.pfx -CertStoreLocation "Cert:\LocalMachine\Root\" -Password $SecurePassword
 } #End New-CodeSigningCert
-
-
-New-CodeSigningCert -Subject "Tyler Applebaum Code Signing Cert" -EMail "tylerapplebaum@gmail.com" -PFXPassword "1234" -FriendlyName "PSCodeSigningTest" -CertValidYears 5 -CertFilePath $([Environment]::GetFolderPath("Desktop"))
