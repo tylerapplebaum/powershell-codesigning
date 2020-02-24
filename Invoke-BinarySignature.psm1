@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    This modules uses an existing code sogning certificate to sign a binary file.
+    This modules uses an existing code signing certificate to sign a binary file.
 .NOTES
     Author  :   Tyler Applebaum
     Created :   Feb 2020
