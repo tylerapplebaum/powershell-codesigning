@@ -32,7 +32,7 @@ Param(
 	[int]$CertValidYears
 )
 
-$MajorVersion = [System.Environment]::OSVersion.Version | Select-Object -ExpandProperty Major)
+$MajorVersion = [System.Environment]::OSVersion.Version | Select-Object -ExpandProperty Major
 If ($MajorVersion -lt 10) {
 	Write-Error "Windows 10 / Server 2016 or better is required to use the New-SelfSignedCertificate cmdlet"
 	Break
@@ -40,6 +40,11 @@ If ($MajorVersion -lt 10) {
 
 $SubjectFull = "CN=$Subject,E=$EMail"
 $SecurePassword = ConvertTo-SecureString -String $PFXPassword -AsPlainText -Force
+
+$DuplicateName = Get-ChildItem Cert:\CurrentUser\My | Where-Object FriendlyName -like $FriendlyName
+If ($null -notlike $DuplicateName) {
+	Write-Warning "An existing certificate exists with this friendly name." -WarningAction Inquire
+}
 
 #Generate certificate
 $CodeSigningCert = New-SelfSignedCertificate -Type CodeSigningCert -KeyUsage DigitalSignature -KeyAlgorithm RSA -CertStoreLocation "Cert:\CurrentUser\My" -Subject $SubjectFull -NotAfter $(Get-Date).AddYears($CertValidYears) -FriendlyName $FriendlyName
