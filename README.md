@@ -11,7 +11,7 @@ Note: This script uses the `New-SelfSignedCertificate` cmdlet, which is only ava
 Usage:
 
 ```powershell
-New-CodeSigningCert -Subject "Tyler Applebaum Code Signing Cert" -EMail "tylerapplebaum@gmail.com" -PFXPassword "1234" -FriendlyName "PSCodeSigningTest" -CertValidYears 5
+New-CodeSigningCert -Subject "Tyler Applebaum Code Signing Cert" -EMail "e@mmail.com" -PFXPassword "1234" -FriendlyName "PSCodeSigningTest" -CertValidYears 5
  ```
  
 ## Invoke-BinarySignature.psm1
