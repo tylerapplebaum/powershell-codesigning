@@ -15,19 +15,19 @@ Function script:New-CodeSigningCert {
 Param(
 	[Parameter(Mandatory=$True,HelpMessage="Certificate subject name")]
 	[String]$Subject,
-	
+
 	[Parameter(Mandatory=$True,HelpMessage="Certificate e-mail address")]
 	[string]$EMail,
-	
+
 	[Parameter(Mandatory=$True,HelpMessage="Certificate friendly name")]
 	[string]$FriendlyName,
-	
+
 	[Parameter(Mandatory=$True,HelpMessage="Certificate PFX password for export")]
 	[string]$PFXPassword,
-	
+
 	[Parameter(HelpMessage="Certificate export path")]
 	$CertFilePath = $([Environment]::GetFolderPath("Desktop")),
-	
+
 	[Parameter(HelpMessage="Certificate validity in years")]
 	[int]$CertValidYears
 )
