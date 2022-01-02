@@ -28,7 +28,7 @@ New-BinarySignature -CertFriendlyName "PSCodeSigningTest" -BinPath "C:\Temp\Test
 ## Potential use cases
 
 ### RDP File Signing
-I've used the code signing certificate to sign .rdp files in order to avoid the certificate warning. 
+Use the code signing certificate generated with `New-CodeSigningCert.ps1` to sign .rdp files in order to avoid the certificate warning. 
 - Create the .rdp file with all of the settings you'll need
 - Generate a certificate using `New-CodeSigningCert`
 - Get the thumbprint of the certificate you'll use to sign the .rdp file with `Get-ChildItem -Path Cert:CurrentUser\My`
@@ -36,3 +36,4 @@ I've used the code signing certificate to sign .rdp files in order to avoid the 
 - Configure group policy to trust the certificate
 	- `Import-Module .\Set-RDPTrustedPublishers.psm1`
 	- `Set-RDPTrustedPublishers -SHA1Thumb <thumbprint> -Verbose`
+	- As an alternative, you can manually configure the GPO if desired. Reference: https://blog.superautomation.co.uk/2020/10/rdp-file-signing.html
