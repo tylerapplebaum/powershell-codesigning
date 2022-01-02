@@ -34,5 +34,5 @@ I've used the code signing certificate to sign .rdp files in order to avoid the 
 - Get the thumbprint of the certificate you'll use to sign the .rdp file with `Get-ChildItem -Path Cert:CurrentUser\My`
 - Run `rdpsign.exe /sha1 <thumbprint> C:\Path\To\workstation.rdp`
 - Configure group policy to trust the certificate
-- - `Import-Module .\Set-RDPTrustedPublishers.psm1`
-- - `Set-RDPTrustedPublishers -SHA1Thumb <thumbprint> -Verbose`
+	- `Import-Module .\Set-RDPTrustedPublishers.psm1`
+	- `Set-RDPTrustedPublishers -SHA1Thumb <thumbprint> -Verbose`
