@@ -15,7 +15,7 @@ Import-Module .\New-CodeSigningCert.psm1
 New-CodeSigningCert -Subject "Your Own Code Signing Cert" -EMail "e@mail.com" -PFXPassword "1234" -FriendlyName "PSCodeSigningTest" -CertValidYears 5
  ```
 
-`New-CodeSigningCert` requires an Adminstrator shell in oprder to import the certificate into the LocalMachine root store.
+`New-CodeSigningCert` requires an Adminstrator shell in order to import the certificate into the LocalMachine root store.
 
 ## Invoke-BinarySignature.psm1
 
