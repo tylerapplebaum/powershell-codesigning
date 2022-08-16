@@ -5,7 +5,7 @@ param(
 	[ValidateNotNull()]
 	[String]$RegistryPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services',
 
-	[Parameter(HelpMessage="Specify the registry key name for the MakeMKV registration key")]
+	[Parameter(HelpMessage="Specify the registry key name")]
 	[ValidateNotNull()]
 	[String]$KeyName = 'TrustedCertThumbprints',
 
